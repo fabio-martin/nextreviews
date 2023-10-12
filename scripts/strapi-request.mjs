@@ -3,14 +3,15 @@ import { writeFileSync } from 'node:fs';
 import qs from 'qs';
 
 const url =
-  'http://localhost:1337/api/reviews' +
+  'http://localhost:1337/api/reviews/' +
   '?' +
   qs.stringify(
     {
+      filters: { slug: { $eq: 'hades-2018' } },
       fields: ['slug', 'title', 'subtitle', 'publishedAt'],
       populate: { image: { fields: ['url'] } },
-      sort: ['publishedAt:desc'],
-      pagination: { pageSize: 6 },
+      // sort: ['publishedAt:desc'],
+      pagination: { pageSize: 1, withCount: false },
     },
     { encodeValuesOnly: true }
   );
